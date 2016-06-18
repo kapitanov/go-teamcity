@@ -2,15 +2,6 @@ package teamcity
 
 import "net/url"
 
-const (
-	// StatusSuccess means successful build status
-	StatusSuccess = "SUCCESS"
-	// StatusFailure means failed build status
-	StatusFailure = "FAILURE"
-	// StatusError means error build status
-	StatusError = "ERROR"
-)
-
 // Authorizer is a TeamCity client authorizer
 type Authorizer interface {
 	// ResolveUrl provides a full absolute root URL.
@@ -71,6 +62,23 @@ type BuildType struct {
 	ProjectID string `json:"projectId"`
 }
 
+// BuildStatus is a build status enum
+type BuildStatus int
+
+const (
+	// StatusUnknown is a zero value of BuildStatus
+	StatusUnknown BuildStatus = iota
+
+	// StatusSuccess is a status of successful build
+	StatusSuccess
+
+	// StatusRunning is a status of build that is currently running
+	StatusRunning
+
+	// StatusFailure is a status of failed build
+	StatusFailure
+)
+
 // Build is a TeamCity project build
 type Build struct {
 	// Build ID
@@ -78,9 +86,11 @@ type Build struct {
 	// Build Number
 	Number string `json:"number"`
 	// Build Status
-	Status string `json:"status"`
-	// Build State
-	State string `json:"state"`
+	Status BuildStatus `json:"status"`
+	// Build Status Text
+	StatusText string `json:"statusText"`
+	// Build Progress Percentage
+	Progress int `json:"progress"`
 	// Build type ID
 	BuildTypeID string `json:"buildTypeId"`
 }
