@@ -127,7 +127,7 @@ func (a basicAuthorizer) GetUserInfo() *url.Userinfo {
 
 func errorf(format string, v ...interface{}) {
 	msg := fmt.Sprintf(format, v...)
-	log.Panicf("[go-teamcity] %s", msg)
+	log.Printf("[go-teamcity] ERROR! %s", msg)
 }
 
 func debugf(format string, v ...interface{}) {
