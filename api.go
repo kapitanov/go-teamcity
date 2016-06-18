@@ -37,14 +37,14 @@ type Client interface {
 	// Get list of all build types
 	GetBuildTypes() ([]BuildType, error)
 	// Get list of build types for a project
-	GetBuildTypesForProject(project Project) ([]BuildType, error)
+	GetBuildTypesForProject(id string) ([]BuildType, error)
 
 	// Get build by its ID
 	GetBuildByID(id int) (Build, error)
 	// Get N latest builds
 	GetBuilds(count int) ([]Build, error)
 	// Get N latest builds for a build type
-	GetBuildsForBuildType(buildType BuildType, count int) ([]Build, error)
+	GetBuildsForBuildType(id string, count int) ([]Build, error)
 }
 
 // Project is a TeamCity project

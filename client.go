@@ -127,10 +127,10 @@ func (a basicAuthorizer) GetUserInfo() *url.Userinfo {
 
 func errorf(format string, v ...interface{}) {
 	msg := fmt.Sprintf(format, v...)
-	log.Panicf("[teamcity] %s", msg)
+	log.Panicf("[go-teamcity] %s", msg)
 }
 
 func debugf(format string, v ...interface{}) {
 	msg := fmt.Sprintf(format, v...)
-	log.Printf("[teamcity] %s", msg)
+	log.Printf("[go-teamcity] %s", msg)
 }

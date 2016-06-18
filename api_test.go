@@ -117,7 +117,7 @@ func Test_GetBuildTypesForProject(t *testing.T) {
 		t.Fail()
 		return
 	}
-	buildTypes, err := client.GetBuildTypesForProject(project)
+	buildTypes, err := client.GetBuildTypesForProject(project.ID)
 	if err != nil {
 		t.Error(err)
 		t.Fail()

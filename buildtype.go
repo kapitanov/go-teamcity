@@ -41,18 +41,18 @@ func (c client) GetBuildTypes() ([]BuildType, error) {
 }
 
 // Get list of build types for a project
-func (c client) GetBuildTypesForProject(project Project) ([]BuildType, error) {
-	debugf("GetBuildTypesForProject('%s')", project.ID)
+func (c client) GetBuildTypesForProject(id string) ([]BuildType, error) {
+	debugf("GetBuildTypesForProject('%s')", id)
 	args := url.Values{}
-	args.Set("locator", fmt.Sprintf("project:%s", url.QueryEscape(project.ID)))
+	args.Set("locator", fmt.Sprintf("project:%s", url.QueryEscape(id)))
 
 	var list buildTypeList
 	err := c.httpGet("/buildTypes", &args, &list)
 	if err != nil {
-		errorf("GetBuildTypesForProject('%s') failed with %s", project.ID, err)
+		errorf("GetBuildTypesForProject('%s') failed with %s", id, err)
 		return nil, err
 	}
 
-	debugf("GetBuildTypesForProject('%s'): OK", project.ID)
+	debugf("GetBuildTypesForProject('%s'): OK", id)
 	return list.BuildTypes, nil
 }

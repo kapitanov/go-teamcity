@@ -44,18 +44,18 @@ func (c client) GetBuilds(count int) ([]Build, error) {
 }
 
 // Get N latest builds for a build type
-func (c client) GetBuildsForBuildType(buildType BuildType, count int) ([]Build, error) {
-	debugf("GetBuildsForBuildType('%s', %d)", buildType.ID, count)
+func (c client) GetBuildsForBuildType(id string, count int) ([]Build, error) {
+	debugf("GetBuildsForBuildType('%s', %d)", id, count)
 	args := url.Values{}
-	args.Set("locator", fmt.Sprintf("buildType:%s,count:%d,running:any", url.QueryEscape(buildType.ID), count))
+	args.Set("locator", fmt.Sprintf("buildType:%s,count:%d,running:any", url.QueryEscape(id), count))
 
 	var list buildList
 	err := c.httpGet("/builds", &args, &list)
 	if err != nil {
-		errorf("GetBuildsForBuildType('%s', %d) failed with %s", buildType.ID, count, err)
+		errorf("GetBuildsForBuildType('%s', %d) failed with %s", id, count, err)
 		return nil, err
 	}
 
-	debugf("GetBuildsForBuildType('%s', %d): OK", buildType.ID, count)
+	debugf("GetBuildsForBuildType('%s', %d): OK", id, count)
 	return list.Builds, nil
 }
