@@ -36,6 +36,19 @@ type Client interface {
 	GetBuilds(count int) ([]Build, error)
 	// Get N latest builds for a build type
 	GetBuildsForBuildType(id string, count int) ([]Build, error)
+
+	// Get change by its ID
+	GetChangeByID(id int) (Change, error)
+	// Get N latest changes
+	GetChanges(count int) ([]Change, error)
+	// Get N latest changes for a project
+	GetChangesForProject(id string, count int) ([]Change, error)
+	// Get changes for a build
+	GetChangesForBuild(id int) ([]Change, error)
+	// Get changes for build type since a particular change
+	GetChangesForBuildTypeSinceChange(btId string, cId int) ([]Change, error)
+	// Get pending changes for build type
+	GetChangesForBuildTypePending(id string) ([]Change, error)
 }
 
 // Project is a TeamCity project
@@ -93,4 +106,16 @@ type Build struct {
 	Progress int `json:"progress"`
 	// Build type ID
 	BuildTypeID string `json:"buildTypeId"`
+}
+
+// Change is a TeamCity project change
+type Change struct {
+	// Change ID
+	ID int `json:"id"`
+	// VCS revision id
+	Version string `json:"version"`
+	// Change author username
+	Username string `json:"username"`
+	// Change date
+	Date string `json:"date"`
 }
